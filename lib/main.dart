@@ -1,5 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:wireless_arduino_project/HomePage.dart';
+import 'package:wireless_arduino_project/saveDoctor.dart';
+import 'package:wireless_arduino_project/savePatients.dart';
+
+import 'adminDashboard.dart';
+import 'login.dart';
 void main() {
   runApp(const MyApp());
 }
@@ -10,7 +16,7 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
         // This is the theme of your application.
@@ -24,7 +30,15 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: ConnectBluetoothDevice(age: 20,)
+        routes: {
+          '/':(context)=>const LoginScreen(),
+          'bluetooth':(context)=>ConnectBluetoothDevice(age: 40,),
+          'adminDashboard':(context)=>AdminDashboard(),
+          'doctorRegistration':(context)=>SaveDoctor_Screen(),
+          'patientRegistration':(context)=>SavePatients(),
+
+
+        },
     );
   }
 }
