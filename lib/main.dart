@@ -3,6 +3,7 @@ import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:wireless_arduino_project/HomePage.dart';
 import 'package:wireless_arduino_project/saveDoctor.dart';
 import 'package:wireless_arduino_project/savePatients.dart';
+import '../DoctorDashboard.dart';
 
 import 'adminDashboard.dart';
 import 'login.dart';
@@ -32,8 +33,10 @@ class MyApp extends StatelessWidget {
       ),
         routes: {
           '/':(context)=>const LoginScreen(),
+          'Login':(context)=>const LoginScreen(),
           'bluetooth':(context)=>ConnectBluetoothDevice(age: 40,),
           'adminDashboard':(context)=>AdminDashboard(),
+          'doctorDashboard':(context)=>PatientDashboard(),
           'doctorRegistration':(context)=>SaveDoctor_Screen(),
           'patientRegistration':(context)=>SavePatients(),
 

@@ -5,8 +5,11 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:wireless_arduino_project/constants/api_url.dart';
 import 'package:http/http.dart' as http;
 import 'package:wireless_arduino_project/models/ModelDashboard.dart';
-import 'package:wireless_arduino_project/models/ModelLogin.dart';
+import 'package:wireless_arduino_project/models/ModelLogin.dart' as modelLogin;
+import 'package:wireless_arduino_project/constants/string.dart' as appSettings;
 
+import '../models/ModelDoctorProfile.dart';
+import '../models/ModelLogin.dart';
 class login_service{
   Future<Map<String, dynamic>> doLogin(String username,String password,String type)async{
 
@@ -26,8 +29,10 @@ class login_service{
           print(result);
           if(result.result!=null){
 
+            setUserDetails(result.result[0]);
+
             return {"status":1,
-              "message":"Login Succesfull"
+              "message":"Login Succesfull","type":type
             };
           }
           else{
@@ -56,6 +61,19 @@ class login_service{
     };
 
   }
+  setUserDetails(modelLogin.Result model)async{
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setString("userDetails", json.encode(model));
+    setappSettingsUser(model);
+
+  }
+  void setappSettingsUser(modelLogin.Result model){
+
+    appSettings.type=model.type;
+    appSettings.userId=model.userid;
+
+
+  }
 
 
 
@@ -72,6 +90,22 @@ Future<DashboardModel> getDashboardSummary() async {
 
       summaryModel = DashboardModel.fromJson(jsonMap);
 
+    }
+  } catch (Exception) {
+    print(Exception);
+    return summaryModel;
+  }
+  return summaryModel;
+}
+Future<DoctorProfileModel> getDoctorProfile(int userId) async {
+
+  var url = Uri.parse(api_url.getDoctorProfile_URL+userId.toString());
+  var summaryModel = null;
+  try {
+    var response = await http.get(url);
+    if (response.statusCode == 200) {
+      var jsonMap = json.decode(response.body);
+      summaryModel = DoctorProfileModel.fromJson(jsonMap);
     }
   } catch (Exception) {
     print(Exception);

@@ -237,7 +237,7 @@ class _SaveDoctor_ScreenState extends State<SaveDoctor_Screen> {
   }
   saveDoctorRegistration(String doctorName,String address,String department,String gender,String email,String remark,String mobile)async{
 
-
+    showLoading(true);
     var data={"doctorname":doctorName, "address":address,
       "department":department,"gender":gender,"email":email,"remark": remark,"mobile": mobile};
     print(data);

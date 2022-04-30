@@ -21,17 +21,20 @@ class Result {
     required this.username,
     required this.password,
     required this.type,
+    required this.userid,
   });
   late final int id;
   late final String username;
   late final String password;
   late final String type;
+  late final int userid;
 
   Result.fromJson(Map<String, dynamic> json){
     id = json['id'];
     username = json['username'];
     password = json['password'];
     type = json['type'];
+    userid = json['userid'];
   }
 
   Map<String, dynamic> toJson() {
@@ -40,6 +43,7 @@ class Result {
     _data['username'] = username;
     _data['password'] = password;
     _data['type'] = type;
+    _data['userid'] = userid;
     return _data;
   }
 }

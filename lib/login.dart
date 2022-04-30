@@ -170,7 +170,17 @@ class _LoginScreenState extends State<LoginScreen> {
       var result = await login_service().doLogin(username, password, type);
       print(result);
       if (result["status"] == 1) {
-        Navigator.pushReplacementNamed(context, "adminDashboard");
+        if (result["type"] == "ADMIN") {
+          Navigator.pushReplacementNamed(context, "adminDashboard");
+        }
+        else if (result["type"] == "DOCTOR") {
+          Navigator.pushReplacementNamed(context, "doctorDashboard");
+        }
+        else if (result["type"] == "PATIENT") {
+          Navigator.pushReplacementNamed(context, "adminDashboard");
+        }
+
+
       } else {
         showLoading(false);
         String val = result["message"].toString();

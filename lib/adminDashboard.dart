@@ -12,17 +12,18 @@ class AdminDashboard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Admin Dashboard",
-          style: TextStyle(color: Color.fromRGBO(24,49,83, 1)),),
-        leading: IconButton(
-          icon: FaIcon(
-            FontAwesomeIcons.arrowAltCircleLeft,
-            color: Color.fromRGBO(24,49,83, 1),
-          ),
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
+        title:  Row(
+          children: [
+            Text("Admin Dashboard",
+              style: TextStyle(color: Color.fromRGBO(24,49,83, 1)),),
+            SizedBox(width: 20,),
+            ElevatedButton.icon(onPressed: (){
+              Navigator.pushReplacementNamed(context, "Login");
+            }, icon: Icon(Icons.logout,size: 15,), label: Text("Logout",style: TextStyle(color: Colors.white),),style: ElevatedButton.styleFrom(primary:Color.fromRGBO(24,49,83, 1) ),)
+
+          ],
         ),
+
         backgroundColor: Colors.transparent,
         bottomOpacity: 0.0,
         elevation: 0.0,

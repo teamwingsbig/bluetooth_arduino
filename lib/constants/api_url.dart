@@ -7,5 +7,6 @@ class api_url{
   static String dashboardURL="$apiBaseURL/dashboard";
   static String saveDoctor_URL="$apiBaseURL/login/saveDoctor";
   static String savePatient_URL="$apiBaseURL/login/savePatient";
+  static String getDoctorProfile_URL="$apiBaseURL/login/fetchDoctorProfile?userid=";
 
 }
