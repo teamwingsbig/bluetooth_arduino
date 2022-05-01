@@ -117,7 +117,7 @@ class _ConnectBluetoothDeviceState extends State<ConnectBluetoothDevice> {
 
 
     chartData!.add(_ChartData(number,number2));
-    if (chartData!.length > 20) {
+    if (chartData!.length > 30) {
       chartData!.removeAt(0);
       _chartSeriesController?.updateDataSource(
         addedDataIndexes: <int>[chartData!.length - 1],
@@ -166,7 +166,7 @@ class _ConnectBluetoothDeviceState extends State<ConnectBluetoothDevice> {
       BeatsPerMinut=0;
       stream=characteristic.value.listen((value) {
         String BlData=ascii.decode(value).toString();
-        if(int.parse(BlData)>0){
+        if(int.parse(BlData)>100){
           BeatsPerMinut++;
         }
         num++;
@@ -207,19 +207,36 @@ ElapsedTimeInSecond=EndTime!.difference(startTime!).inSeconds;
 
   }
   calculateBPOStatus(int age,double beepsPerSecond,int elapsedSecond){
-    double bpm=1.2*elapsedSecond;
-    double beepPerMinut=0;
-    beepPerMinut=(beepsPerSecond/elapsedSecond)*60;
-    this.bpm=beepPerMinut.toInt();
+    print("beepsPerSecond:$beepsPerSecond and elapsedSecond:$elapsedSecond");
+    double beepsInSecond=0;
+    double calculatedBeeps=0;
+    beepsInSecond=beepsPerSecond/2;
+    calculatedBeeps=beepsInSecond/elapsedSecond;
+    double beepsInMinute=0;
+    beepsInMinute=calculatedBeeps*60;
+    print("beepsInMinute:$beepsInMinute");
+     bpm=beepsInMinute.toInt();
+    // print("beats pert second $beepsPerSecond");
+    // double beepPerSecondConverted=0;
+    // beepPerSecondConverted=beepsPerSecond/2;
+    // print("beats pert beepPerSecondConverted $beepPerSecondConverted");
+    // double x=(beepPerSecondConverted/beepsPerSecond);
+    // print("x$x");
+    // double bpmCalculated=(x*60);
+    // print("elapsedSecond$elapsedSecond");
+    // print(x*60);
+    // print("bpm is bpmCalculated $bpmCalculated");
+    // this.bpm=bpmCalculated.toInt();
     int ageNumber=220-age;
     double seventyPercentageofAgeNumber=(ageNumber*70)/100;
     double fiftyPercentageofAgeNumber=(ageNumber*50)/100;
-    if(beepPerMinut>=fiftyPercentageofAgeNumber && beepPerMinut<=seventyPercentageofAgeNumber){
+    if(bpm>=fiftyPercentageofAgeNumber && bpm<=seventyPercentageofAgeNumber){
       bpmStatus="Normal";
+
     }
-    else if(beepPerMinut>seventyPercentageofAgeNumber)
+    else if(bpm>seventyPercentageofAgeNumber)
       bpmStatus="High";
-    else if(beepPerMinut<fiftyPercentageofAgeNumber)
+    else if(bpm<fiftyPercentageofAgeNumber)
       bpmStatus="Low";
   }
   @override
