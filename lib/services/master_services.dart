@@ -7,9 +7,12 @@ import 'package:http/http.dart' as http;
 import 'package:wireless_arduino_project/models/ModelDashboard.dart';
 import 'package:wireless_arduino_project/models/ModelLogin.dart' as modelLogin;
 import 'package:wireless_arduino_project/constants/string.dart' as appSettings;
+import 'package:wireless_arduino_project/models/ModelPatientCheckup.dart';
+import 'package:wireless_arduino_project/models/ModelPatientProfile.dart';
 
 import '../models/ModelDoctorProfile.dart';
 import '../models/ModelLogin.dart';
+import '../models/ModelPatientList.dart';
 class login_service{
   Future<Map<String, dynamic>> doLogin(String username,String password,String type)async{
 
@@ -113,7 +116,79 @@ Future<DoctorProfileModel> getDoctorProfile(int userId) async {
   }
   return summaryModel;
 }
+
 class master_service{
+  Future<PatientProfileModel> getPatientProfile(int userId) async {
+
+    var url = Uri.parse(api_url.getPatientProfile_URL+userId.toString());
+    var summaryModel = null;
+    try {
+      var response = await http.get(url);
+      if (response.statusCode == 200) {
+        var jsonMap = json.decode(response.body);
+        summaryModel = PatientProfileModel.fromJson(jsonMap);
+      }
+    } catch (Exception) {
+      print(Exception);
+      return summaryModel;
+    }
+    return summaryModel;
+  }
+  getPatientList() async {
+    var url = Uri.parse(api_url.getPatientList_URL);
+    print(url);
+    var patientList = null;
+    try {
+      var response = await http.get(url);
+      if (response.statusCode == 200) {
+        var jsonMap = json.decode(response.body);
+        // print(response.body);
+        print(jsonMap);
+        patientList = ledgerModelFromJson(jsonEncode(jsonMap['result']));
+      }
+    } catch (Exception) {
+      print(Exception);
+      return patientList;
+    }
+    return patientList;
+  }
+  getPatientCheckupList(int patientId) async {
+    var url = Uri.parse(api_url.getPatientCheckupList_URL+patientId.toString());
+    print(url);
+    var patientList = null;
+    try {
+      var response = await http.get(url);
+      if (response.statusCode == 200) {
+        var jsonMap = json.decode(response.body);
+        // print(response.body);
+        print(jsonMap);
+        patientList = PatientCheckupListModelFromJson(jsonEncode(jsonMap['result']));
+      }
+    } catch (Exception) {
+      print(Exception);
+      return patientList;
+    }
+    return patientList;
+  }
+  getPatienCheckupList() async {
+    var url = Uri.parse(api_url.getPatientList_URL);
+    print(url);
+    var patientList = null;
+    try {
+      var response = await http.get(url);
+      if (response.statusCode == 200) {
+        var jsonMap = json.decode(response.body);
+        // print(response.body);
+        print(jsonMap);
+        patientList = ledgerModelFromJson(jsonEncode(jsonMap['result']));
+      }
+    } catch (Exception) {
+      print(Exception);
+      return patientList;
+    }
+    return patientList;
+  }
+
   Future<Map<String, dynamic>>saveDoctors(Map<String, dynamic> data)async{
     try{
       print(data);
@@ -125,6 +200,23 @@ class master_service{
        print(result);
 
       return {"status":1,"message":"Doctor Registered Succesfully"};
+    }
+    catch(Exception){
+      return {"status":0,"message":Exception};
+    }
+
+  }
+  Future<Map<String, dynamic>>saveCheckup(Map<String, dynamic> data)async{
+    try{
+      print(data);
+      var url = Uri.parse(api_url.saveCheckup_URL);
+      final headers = {"Content-type": "application/json"};
+
+      final response = await http.post(url, headers: headers, body: jsonEncode(data));
+      var result=json.decode(response.body);
+      print(result);
+
+      return {"status":1,"message":"Checkup Added Succesfully"};
     }
     catch(Exception){
       return {"status":0,"message":Exception};

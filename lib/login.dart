@@ -177,7 +177,7 @@ class _LoginScreenState extends State<LoginScreen> {
           Navigator.pushReplacementNamed(context, "doctorDashboard");
         }
         else if (result["type"] == "PATIENT") {
-          Navigator.pushReplacementNamed(context, "adminDashboard");
+          Navigator.pushReplacementNamed(context, "patientDashboard");
         }
 
 

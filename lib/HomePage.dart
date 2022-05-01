@@ -5,8 +5,9 @@ import 'package:flutter_blue/flutter_blue.dart';
 import 'dart:convert';
 import 'package:syncfusion_flutter_charts/charts.dart';
 class ConnectBluetoothDevice extends StatefulWidget {
-  const ConnectBluetoothDevice({required this.age});
+  const ConnectBluetoothDevice({required this.age,required this.onSelectPatient});
   final int age;
+  final ValueChanged<Map> onSelectPatient;
   @override
   _ConnectBluetoothDeviceState createState() => _ConnectBluetoothDeviceState();
 }
@@ -27,7 +28,7 @@ class _ConnectBluetoothDeviceState extends State<ConnectBluetoothDevice> {
   DateTime? startTime;
   DateTime? EndTime;
   int BeatsPerMinut=0;
-  double bpm=0;
+  int bpm=0;
   String bpmStatus="";
 
   int ElapsedTimeInSecond=0;
@@ -207,7 +208,7 @@ ElapsedTimeInSecond=EndTime!.difference(startTime!).inSeconds;
   }
   calculateBPOStatus(int age,double beepsPerSecond,int elapsedSecond){
     double bpm=1.2*elapsedSecond;
-    this.bpm=bpm;
+    this.bpm=bpm.toInt();
     int ageNumber=220-age;
     double seventyPercentageofAgeNumber=(ageNumber*70)/100;
     double fiftyPercentageofAgeNumber=(ageNumber*50)/100;
@@ -313,7 +314,14 @@ ElapsedTimeInSecond=EndTime!.difference(startTime!).inSeconds;
                       ),
                     ),
                     SizedBox(height: 10,),
-                    ElevatedButton.icon(onPressed: (){}, icon: Icon(Icons.check_circle,color: Colors.white,),style: ElevatedButton.styleFrom(primary: Colors.green), label: Text("Submite Result"))
+                    ElevatedButton.icon(onPressed: (){
+                      var ledgerDetails={
+                        'bpm':bpm.toString(),
+                        'bpmStatus':bpmStatus
+                      };
+                      widget.onSelectPatient(ledgerDetails);
+                      Navigator.of(context).pop();
+                    }, icon: Icon(Icons.check_circle,color: Colors.white,),style: ElevatedButton.styleFrom(primary: Colors.green), label: Text("Submite Result"))
 
                   ],
                 ),

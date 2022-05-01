@@ -7,14 +7,21 @@ import 'models/ModelDashboard.dart';
 import 'models/ModelDoctorProfile.dart';
 import 'package:wireless_arduino_project/constants/string.dart' as appSettings;
 
-class PatientDashboard extends StatefulWidget {
-  const PatientDashboard({Key? key}) : super(key: key);
+class DoctorDashboard extends StatefulWidget {
+  const DoctorDashboard({Key? key}) : super(key: key);
 
   @override
-  _PatientDashboardState createState() => _PatientDashboardState();
+  _DoctorDashboardState createState() => _DoctorDashboardState();
 }
 
-class _PatientDashboardState extends State<PatientDashboard> {
+class _DoctorDashboardState extends State<DoctorDashboard> {
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    print(appSettings.userId);
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -84,9 +91,10 @@ class _PatientDashboardState extends State<PatientDashboard> {
               height: 10,
             ),
             FutureBuilder<DoctorProfileModel>(
-                future: getDoctorProfile(appSettings.userId),
+                future:  getDoctorProfile(appSettings.userId),
                 builder: (context, snapshot) {
                   if (snapshot.hasData) {
+                    print(snapshot.data!.result);
                     return Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Container(
@@ -127,13 +135,13 @@ class _PatientDashboardState extends State<PatientDashboard> {
                                 ):Text(''),
                               ),
                               Center(
-                                child: Text(
+                                child: snapshot.data!.result.length>0?Text(
                                   "Department: ${snapshot.data!.result[0].Department}",
                                   style: TextStyle(
                                       fontSize: 15,
                                       fontWeight: FontWeight.bold,
                                       color: Colors.green),
-                                ),
+                                ):Text(''),
                               ),
                             ],
                           ),
@@ -251,7 +259,7 @@ class _PatientDashboardState extends State<PatientDashboard> {
             SizedBox(height: 10,),
             InkWell(
               onTap: () {
-                Navigator.pushNamed(context, "bluetooth");
+                Navigator.pushNamed(context, "beginCheckup");
               },
               child: Container(
                   child: Center(

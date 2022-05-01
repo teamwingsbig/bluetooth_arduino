@@ -38,6 +38,7 @@ dependencies:
   form_builder_extra_fields: ^7.1.0
   form_builder_validators: ^7.6.1
   shared_preferences: ^2.0.13
+  modal_bottom_sheet: ^2.0.0
   google_fonts: ^2.3.1
   get: ^4.6.1
 
