@@ -172,16 +172,36 @@ class _BeginCheckupState extends State<BeginCheckup> {
                     ),
                     SizedBox(height: 20,),
                     Center(child: ElevatedButton.icon(onPressed: (){
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) {
-                                return ConnectBluetoothDevice(age: age,onSelectPatient: (value){
+                      if(age!=null &&age>0){
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) {
+                                  return ConnectBluetoothDevice(age: age,onSelectPatient: (value){
 
-                                  _formKey.currentState!.fields["bpm"]!.didChange(value["bpm"].toString());
-                                  _formKey.currentState!.fields["bpmStatus"]!.didChange(value["bpmStatus"].toString());
-                                },);
-                              }));
+                                    _formKey.currentState!.fields["bpm"]!.didChange(value["bpm"].toString());
+                                    _formKey.currentState!.fields["bpmStatus"]!.didChange(value["bpmStatus"].toString());
+                                  },);
+                                }));
+                      }
+                      else{
+                        Get.snackbar(
+
+                          "Please verify patient Age",
+                          "The age is: "+age.toString(),
+                          icon: Icon(Icons.error, color: Colors.white),
+                          snackPosition: SnackPosition.BOTTOM,
+                          backgroundColor: Colors.deepOrangeAccent,
+                          borderRadius: 10,
+                          margin: EdgeInsets.all(15),
+                          colorText: Colors.white,
+                          duration: Duration(seconds: 4),
+                          isDismissible: true,
+                          forwardAnimationCurve: Curves.easeOutBack,
+
+                        );
+                      }
+
                     },style: ElevatedButton.styleFrom(primary:Color.fromRGBO(24, 49, 83, 1) ), icon: Icon(Icons.stacked_line_chart), label: Text("Check BPM")),),
                     SizedBox(height: 20,),
                     FormBuilderTextField(name: "bpm",
