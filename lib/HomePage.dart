@@ -208,17 +208,18 @@ ElapsedTimeInSecond=EndTime!.difference(startTime!).inSeconds;
   }
   calculateBPOStatus(int age,double beepsPerSecond,int elapsedSecond){
     double bpm=1.2*elapsedSecond;
-    this.bpm=bpm.toInt();
+    double beepPerMinut=0;
+    beepPerMinut=(beepsPerSecond/elapsedSecond)*60;
+    this.bpm=beepPerMinut.toInt();
     int ageNumber=220-age;
     double seventyPercentageofAgeNumber=(ageNumber*70)/100;
     double fiftyPercentageofAgeNumber=(ageNumber*50)/100;
-    if(bpm>=fiftyPercentageofAgeNumber && bpm<=seventyPercentageofAgeNumber){
+    if(beepPerMinut>=fiftyPercentageofAgeNumber && beepPerMinut<=seventyPercentageofAgeNumber){
       bpmStatus="Normal";
-
     }
-    else if(bpm>seventyPercentageofAgeNumber)
+    else if(beepPerMinut>seventyPercentageofAgeNumber)
       bpmStatus="High";
-    else if(bpm<fiftyPercentageofAgeNumber)
+    else if(beepPerMinut<fiftyPercentageofAgeNumber)
       bpmStatus="Low";
   }
   @override
@@ -254,7 +255,14 @@ ElapsedTimeInSecond=EndTime!.difference(startTime!).inSeconds;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("My Blue Steth"),),
+      appBar: AppBar(title: Text("My Blue Steth"),
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back, color: Colors.white),
+          onPressed: () {
+            stopListen();
+            Navigator.of(context).pop();
+          }
+        ), ),
       body: SingleChildScrollView(
         child: Column(
           children: [
