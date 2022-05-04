@@ -6,6 +6,10 @@
 <array>
     <string>_dartobservatory._tcp</string>
 </array>
+<key>NSAppTransportSecurity</key>
+<dict>
+   <key>NSAllowsArbitraryLoads</key><true/>
+</dict>
  <key>NSBluetoothAlwaysUsageDescription</key>
 	    <string>Need BLE permission</string>
 	    <key>NSBluetoothPeripheralUsageDescription</key>
@@ -27,7 +31,7 @@
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>wireless_arduino_project</string>
+	<string>MyBlueSteth</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
