@@ -111,6 +111,7 @@ class _SaveDoctor_ScreenState extends State<SaveDoctor_Screen> {
                         ),
                       ),
                       items: [
+
                         "Allergists/Immunologists",
                         "Anesthesiologists",
                         "Cardiologists",
