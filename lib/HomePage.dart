@@ -135,10 +135,13 @@ class _ConnectBluetoothDeviceState extends State<ConnectBluetoothDevice> {
 
     return SfCartesianChart(
         plotAreaBorderWidth: 0,
+        plotAreaBackgroundColor: Colors.lightGreen.shade100,
         primaryXAxis:
-        NumericAxis(majorGridLines: const MajorGridLines(width: 0)),
+        NumericAxis(majorGridLines: const MajorGridLines(width: 0),isVisible: true,  axisLine: const AxisLine(width: 0),),
         primaryYAxis: NumericAxis(
-            axisLine: const AxisLine(width: 0),
+
+          isVisible: true,
+            axisLine: const AxisLine(width: 0,color: Colors.black),
             majorTickLines: const MajorTickLines(size: 0)),
         series: <LineSeries<_ChartData, int>>[
           LineSeries<_ChartData, int>(
@@ -146,7 +149,7 @@ class _ConnectBluetoothDeviceState extends State<ConnectBluetoothDevice> {
               _chartSeriesController = controller;
             },
             dataSource: chartData!,
-            color: const Color.fromRGBO(192, 108, 132, 1),
+            color: Colors.black,
             xValueMapper: (_ChartData sales, _) => sales.soundValue,
             yValueMapper: (_ChartData sales, _) => sales.time,
             animationDuration: 0,
@@ -166,7 +169,7 @@ class _ConnectBluetoothDeviceState extends State<ConnectBluetoothDevice> {
       BeatsPerMinut=0;
       stream=characteristic.value.listen((value) {
         String BlData=ascii.decode(value).toString();
-        if(int.parse(BlData)>100){
+        if(int.parse(BlData)>1000){
           BeatsPerMinut++;
         }
         num++;
@@ -272,7 +275,8 @@ ElapsedTimeInSecond=EndTime!.difference(startTime!).inSeconds;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("My Blue Steth"),
+      appBar: AppBar(title: Text("Blue Scope"),
+        backgroundColor: Colors.lightGreen,
         leading: IconButton(
           icon: Icon(Icons.arrow_back, color: Colors.white),
           onPressed: () {
@@ -284,7 +288,7 @@ ElapsedTimeInSecond=EndTime!.difference(startTime!).inSeconds;
         child: Column(
           children: [
             SizedBox(height: 20,),
-            Center(child: Text("Status: $deviceStatus",style: TextStyle(fontSize: 18),),),
+            Center(child: Text("Status: $deviceStatus",style: TextStyle(fontSize: 18,color: Colors.green),),),
             SizedBox(height: 20,),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -339,6 +343,8 @@ ElapsedTimeInSecond=EndTime!.difference(startTime!).inSeconds;
                       ),
                     ),
                     SizedBox(height: 10,),
+                    Center(child: Text("This is only for academic project purpose. \n The orginal value may be vary")),
+                    SizedBox(height: 10,),
                     ElevatedButton.icon(onPressed: (){
                       var ledgerDetails={
                         'bpm':bpm.toString(),
@@ -346,7 +352,8 @@ ElapsedTimeInSecond=EndTime!.difference(startTime!).inSeconds;
                       };
                       widget.onSelectPatient(ledgerDetails);
                       Navigator.of(context).pop();
-                    }, icon: Icon(Icons.check_circle,color: Colors.white,),style: ElevatedButton.styleFrom(primary: Colors.green), label: Text("Submite Result"))
+                    }, icon: Icon(Icons.check_circle,color: Colors.white,),style: ElevatedButton.styleFrom(primary: Colors.green), label: Text("Submite Result")),
+                    SizedBox(height: 35,),
 
                   ],
                 ),

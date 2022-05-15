@@ -48,7 +48,7 @@ class _SavePatientsState extends State<SavePatients> {
             Navigator.of(context).pop();
           },
         ),
-        backgroundColor: Colors.lightBlue,
+        backgroundColor: Colors.lightGreen,
         bottomOpacity: 0.0,
         elevation: 0.0,
 
@@ -70,14 +70,7 @@ class _SavePatientsState extends State<SavePatients> {
                   bottomLeft: Radius.circular(10),
                   bottomRight: Radius.circular(10)
               ),
-              boxShadow: [
-                BoxShadow(
-                  color:Colors.lightBlue,
-                  spreadRadius: 3,
-                  blurRadius: 5,
-                  offset: Offset(0, 3), // changes position of shadow
-                ),
-              ],
+
             ),
 
             child: Padding(
@@ -87,7 +80,14 @@ class _SavePatientsState extends State<SavePatients> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    FormBuilderTextField(name: "patientName",
+                    Center(
+                      child: Image.asset(
+                        "assets/images/patient.png",
+                        fit: BoxFit.fill,
+                      ),
+                    ),
+                    SizedBox(height: 10,),
+                    FormBuilderTextField(name: "PatientName",
                       validator: FormBuilderValidators.required(context,errorText: "Invalid Doctor Name"),
                       autofocus: false,
                       decoration: InputDecoration(
@@ -99,27 +99,6 @@ class _SavePatientsState extends State<SavePatients> {
                       ),
                     ),
                     SizedBox(height: 8,),
-                    FormBuilderTextField(name: "age",
-
-                      autofocus: false,      keyboardType: TextInputType.number,
-                      decoration: InputDecoration(
-                          labelText: 'Age',
-                          border: OutlineInputBorder(),
-                          prefixIcon: Icon(Icons.text_snippet_sharp)
-                      ),
-                    ),
-                    SizedBox(height: 8,),
-                    FormBuilderTextField(name: "address",
-
-                      autofocus: false,
-                      maxLines: 2,
-                      decoration: InputDecoration(
-                          labelText: 'Address',
-                          border: OutlineInputBorder(),
-                          prefixIcon: Icon(Icons.text_snippet_sharp)
-                      ),
-                    ),
-                    SizedBox(height: 8,),
                     FormBuilderTextField(name: "email",
 
                       autofocus: false,
@@ -127,7 +106,7 @@ class _SavePatientsState extends State<SavePatients> {
                       decoration: InputDecoration(
                           labelText: 'Email',
                           border: OutlineInputBorder(),
-                          prefixIcon: Icon(Icons.text_snippet_sharp)
+                          prefixIcon: Icon(Icons.email)
                       ),
                     ),
                     SizedBox(height: 8,),
@@ -143,6 +122,28 @@ class _SavePatientsState extends State<SavePatients> {
                       ),
                     ),
                     SizedBox(height: 8,),
+                    FormBuilderTextField(name: "age",
+
+                      autofocus: false,      keyboardType: TextInputType.number,
+                      decoration: InputDecoration(
+                          labelText: 'Age',
+                          border: OutlineInputBorder(),
+                          prefixIcon: Icon(Icons.numbers)
+                      ),
+                    ),
+                    SizedBox(height: 8,),
+                    FormBuilderTextField(name: "address",
+
+                      autofocus: false,
+                      maxLines: 2,
+                      decoration: InputDecoration(
+                          labelText: 'Address',
+                          border: OutlineInputBorder(),
+                          prefixIcon: Icon(Icons.text_snippet_sharp)
+                      ),
+                    ),
+                    SizedBox(height: 8,),
+
                     FormBuilderRadioGroup(
                       decoration: InputDecoration(
                         labelText: 'Gender',
@@ -183,12 +184,12 @@ class _SavePatientsState extends State<SavePatients> {
                             //  _formKey.currentState!.reset();
                           }
                         }, icon: Icon(Icons.check_circle), label: Text("Submit"),style: ElevatedButton.
-                        styleFrom(primary: Color.fromRGBO(24,49,83, 1)),),
+                        styleFrom(primary: Colors.green),),
                         SizedBox(width: 10,),
                         ElevatedButton.icon(onPressed: (){
                           resetForm();
                         }, icon: Icon(Icons.refresh_sharp), label: Text("Reset"),style: ElevatedButton.
-                        styleFrom(primary: Color.fromRGBO(24,49,83, 1)),)
+                        styleFrom(primary: Colors.green),)
 
                       ],
                     )

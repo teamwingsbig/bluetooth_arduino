@@ -12,115 +12,104 @@ class AdminDashboard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        foregroundColor: Colors.green,
+        primary: true,
         title:  Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text("Admin Dashboard",
-              style: TextStyle(color: Color.fromRGBO(24,49,83, 1)),),
-            SizedBox(width: 20,),
-            ElevatedButton.icon(onPressed: (){
+            Text("Dashboard",
+              style: TextStyle(color:Colors.white),),
+
+            InkWell(child: Text("Logout",style: TextStyle(color: Colors.white),),onTap: (){
               Navigator.pushReplacementNamed(context, "Login");
-            }, icon: Icon(Icons.logout,size: 15,), label: Text("Logout",style: TextStyle(color: Colors.white),),style: ElevatedButton.styleFrom(primary:Color.fromRGBO(24,49,83, 1) ),)
+            },),
 
           ],
         ),
 
-        backgroundColor: Colors.transparent,
-        bottomOpacity: 0.0,
-        elevation: 0.0,
+
 
       ),
       body: Column(
-        children: [
+        children: [SizedBox(
+          height: 20,
+        ),
+
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Container(
-                child: Center(
-                  child: ListTile(
-                    title: Text(
-                      "Welcome to My Blue Steth App",
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: Colors.blue.shade700),
-                    ),
-                    leading: Image.asset(
-                      "assets/images/stethoscope128.png",
-                      fit: BoxFit.fill,
-                    ),
-                  ),
-                ),
-                height: 130,
-                width: MediaQuery.of(context).size.width * 0.95,
-                decoration: BoxDecoration(
-                  color: Colors.grey.shade300,
-                  borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(10),
-                      topRight: Radius.circular(10),
-                      bottomLeft: Radius.circular(10),
-                      bottomRight: Radius.circular(10)),
-                )),
+            child: Image.asset(
+              "assets/images/stethoscope256.png",
+              fit: BoxFit.fill,
+            )
           ),
           SizedBox(
-            height: 10,
+            height: 20,
           ),
-          FutureBuilder<DashboardModel>(
-            future: getDashboardSummary(),
-            builder: (context, snapshot) {
-              if(snapshot.hasData){
-                return
-                  Column(
-                    children: [
-                      Container(
-                          child: Center(
-                            child: Text(
-                              'Total Registered Doctors: ${snapshot.data!.result[0].DoctorsCount}',
-                              style: GoogleFonts.lato(
-                                  textStyle: TextStyle(color: Colors.white, fontSize: 18),
-                                  letterSpacing: 0.3),
+          Center(
+            child: FutureBuilder<DashboardModel>(
+              future: getDashboardSummary(),
+              builder: (context, snapshot) {
+                if(snapshot.hasData){
+                  return
+                    Column(
+                      children: [
+                        Container(
+                            child: Center(
+                              child: Text(
+                                'Total Registered Doctors: ${snapshot.data!.result[0].DoctorsCount}',
+                                style: GoogleFonts.lato(
+                                    textStyle: TextStyle(color: Colors.blueGrey, fontSize: 18),
+                                    letterSpacing: 0.3),
+                              ),
                             ),
-                          ),
-                          height: 50,
-                          width: MediaQuery.of(context).size.width * 0.95,
-                          decoration: BoxDecoration(
-                            color: Colors.green.shade500,
-                            borderRadius: BorderRadius.only(
-                                topLeft: Radius.circular(10),
-                                topRight: Radius.circular(10),
-                                bottomLeft: Radius.circular(10),
-                                bottomRight: Radius.circular(10)),
-                          )),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      Container(
-                          child: Center(
-                            child: Text(
-                              'Total Registered Patient:  ${snapshot.data!.result[0].PatientsCount}',
-                              style: GoogleFonts.lato(
-                                  textStyle: TextStyle(color: Colors.white, fontSize: 18),
-                                  letterSpacing: 0.3),
+                            height: 50,
+                            width: MediaQuery.of(context).size.width * 0.95,
+                            decoration: BoxDecoration(
+                              border: Border.all(
+                                color: Colors.blue,
+                              ),
+                              borderRadius: BorderRadius.only(
+                                  topLeft: Radius.circular(10),
+                                  topRight: Radius.circular(10),
+                                  bottomLeft: Radius.circular(10),
+                                  bottomRight: Radius.circular(10)),
+                            )),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Container(
+                            child: Center(
+                              child: Text(
+                                'Total Registered Patient:  ${snapshot.data!.result[0].PatientsCount}',
+                                style: GoogleFonts.lato(
+                                    textStyle: TextStyle(color: Colors.blueGrey, fontSize: 18),
+                                    letterSpacing: 0.3),
+                              ),
                             ),
-                          ),
-                          height: 50,
-                          width: MediaQuery.of(context).size.width * 0.95,
-                          decoration: BoxDecoration(
-                            color: Colors.blueGrey.shade500,
-                            borderRadius: BorderRadius.only(
-                                topLeft: Radius.circular(10),
-                                topRight: Radius.circular(10),
-                                bottomLeft: Radius.circular(10),
-                                bottomRight: Radius.circular(10)),
-                          )),
-                      SizedBox(
-                        height: 15,
-                      ),
-                    ],
-                  );
-              }
-              else{
-                return Container();
-              }
+                            height: 50,
+                            width: MediaQuery.of(context).size.width * 0.95,
+                            decoration: BoxDecoration(
+                              border: Border.all(
+                                color: Colors.blue,
+                              ),
+                              borderRadius: BorderRadius.only(
+                                  topLeft: Radius.circular(10),
+                                  topRight: Radius.circular(10),
+                                  bottomLeft: Radius.circular(10),
+                                  bottomRight: Radius.circular(10)),
+                            )),
+                        SizedBox(
+                          height: 15,
+                        ),
+                      ],
+                    );
+                }
+                else{
+                  return Container();
+                }
 
-            }),
+              }),
+          ),
 
 
 
@@ -131,6 +120,7 @@ class AdminDashboard extends StatelessWidget {
             child: Container(
                 child: Center(
                   child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       IconButton(
                         icon: Image.asset('assets/images/doctor.png'),
@@ -141,8 +131,8 @@ class AdminDashboard extends StatelessWidget {
                         'Register Doctor',
                         style: GoogleFonts.lato(
                             textStyle:
-                                TextStyle(color: Colors.white, fontSize: 18),
-                            letterSpacing: 0.3),
+                                TextStyle(color: Colors.blueGrey, fontSize: 22),
+                            letterSpacing: 0.3,fontWeight: FontWeight.bold ),
                       )
                     ],
                   ),
@@ -150,7 +140,9 @@ class AdminDashboard extends StatelessWidget {
                 height: 50,
                 width: MediaQuery.of(context).size.width * 0.95,
                 decoration: BoxDecoration(
-                  color: Colors.lightGreen.shade400,
+                  border: Border.all(
+                    color: Colors.blue,
+                  ),
                   borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(10),
                       topRight: Radius.circular(10),
@@ -168,6 +160,7 @@ class AdminDashboard extends StatelessWidget {
             child: Container(
                 child: Center(
                   child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       IconButton(
                         icon: Image.asset('assets/images/examination.png'),
@@ -178,8 +171,8 @@ class AdminDashboard extends StatelessWidget {
                         'Register Patient',
                         style: GoogleFonts.lato(
                             textStyle:
-                                TextStyle(color: Colors.white, fontSize: 18),
-                            letterSpacing: 0.3),
+                                TextStyle(color: Colors.blueGrey, fontSize: 22),
+                            letterSpacing: 0.3,fontWeight: FontWeight.bold),
                       )
                     ],
                   ),
@@ -187,7 +180,9 @@ class AdminDashboard extends StatelessWidget {
                 height: 50,
                 width: MediaQuery.of(context).size.width * 0.95,
                 decoration: BoxDecoration(
-                  color: Colors.lightGreen.shade400,
+                  border: Border.all(
+                    color: Colors.blue,
+                  ),
                   borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(10),
                       topRight: Radius.circular(10),

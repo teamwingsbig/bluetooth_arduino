@@ -56,7 +56,7 @@ class _BeginCheckupState extends State<BeginCheckup> {
 
           ],
         ),
-        backgroundColor: Colors.transparent,
+        backgroundColor: Colors.lightGreen,
         bottomOpacity: 0.0,
         elevation: 0.0,
       ),
@@ -94,6 +94,8 @@ class _BeginCheckupState extends State<BeginCheckup> {
                   mainAxisSize: MainAxisSize.min,
                   children: [
 
+                    Image.asset(   "assets/images/cardiogram.png",
+                      fit: BoxFit.fill,),
                     SizedBox(height: 10,),
                     _formFieldLedger(builderName: "patientBuilder", fieldName: "patient", validationMessage: "Select a Patient", labelText: "Select a Patient"),
                     SizedBox(height: 10,),
@@ -133,7 +135,7 @@ class _BeginCheckupState extends State<BeginCheckup> {
                               );
                             });
 
-                      },style: ElevatedButton.styleFrom(primary:Color.fromRGBO(24, 49, 83, 1) ), icon: Icon(Icons.history,size: 15,), label: Text("Show History"))),
+                      },style: ElevatedButton.styleFrom(primary:Colors.green), icon: Icon(Icons.history,size: 20,), label: Text("History"))),
                     ),
                     SizedBox(height: 10,),
 
@@ -202,7 +204,7 @@ class _BeginCheckupState extends State<BeginCheckup> {
                         );
                       }
 
-                    },style: ElevatedButton.styleFrom(primary:Color.fromRGBO(24, 49, 83, 1) ), icon: Icon(Icons.stacked_line_chart), label: Text("Check BPM")),),
+                    },style: ElevatedButton.styleFrom(primary:Colors.green ), icon: Icon(Icons.stacked_line_chart), label: Text("Check BPM")),),
                     SizedBox(height: 20,),
                     FormBuilderTextField(name: "bpm",
                       autofocus: false,
@@ -242,12 +244,12 @@ class _BeginCheckupState extends State<BeginCheckup> {
                             //  _formKey.currentState!.reset();
                           }
                         }, icon: Icon(Icons.check_circle), label: Text("Submit"),style: ElevatedButton.
-                        styleFrom(primary: Color.fromRGBO(24, 49, 83, 1)),),
+                        styleFrom(primary: Colors.green),),
                         SizedBox(width: 10,),
                         ElevatedButton.icon(onPressed: (){
                           resetForm();
                         }, icon: Icon(Icons.refresh_sharp), label: Text("Reset"),style: ElevatedButton.
-                        styleFrom(primary: Color.fromRGBO(24, 49, 83, 1)),)
+                        styleFrom(primary: Colors.red),)
 
                       ],
                     )

@@ -37,7 +37,8 @@ class _SaveDoctor_ScreenState extends State<SaveDoctor_Screen> {
   Widget build(BuildContext context) {
     return SafeArea(child: Scaffold(
       appBar: AppBar(
-        title: Text("Doctor Registration",
+
+        title: Text("Register Doctor",
          ),
         leading: IconButton(
           icon: FaIcon(
@@ -48,7 +49,7 @@ class _SaveDoctor_ScreenState extends State<SaveDoctor_Screen> {
             Navigator.of(context).pop();
           },
         ),
-        backgroundColor: Colors.lightBlue,
+        backgroundColor: Colors.lightGreen.shade300,
         bottomOpacity: 0.0,
         elevation: 0.0,
 
@@ -70,14 +71,7 @@ class _SaveDoctor_ScreenState extends State<SaveDoctor_Screen> {
                   bottomLeft: Radius.circular(10),
                   bottomRight: Radius.circular(10)
               ),
-              boxShadow: [
-                BoxShadow(
-                  color:Colors.lightBlue,
-                  spreadRadius: 3,
-                  blurRadius: 5,
-                  offset: Offset(0, 3), // changes position of shadow
-                ),
-              ],
+
             ),
 
             child: Padding(
@@ -87,6 +81,13 @@ class _SaveDoctor_ScreenState extends State<SaveDoctor_Screen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisSize: MainAxisSize.min,
                   children: [
+                    Center(
+                      child: Image.asset(
+                        "assets/images/doctorreg.png",
+                        fit: BoxFit.fill,
+                      ),
+                    ),
+                    SizedBox(height: 20,),
                     FormBuilderTextField(name: "doctorname",
                       validator: FormBuilderValidators.required(context,errorText: "Invalid Doctor Name"),
                       autofocus: false,
@@ -137,7 +138,7 @@ class _SaveDoctor_ScreenState extends State<SaveDoctor_Screen> {
                       decoration: InputDecoration(
                           labelText: 'Mobile',
                           border: OutlineInputBorder(),
-                          prefixIcon: Icon(Icons.text_snippet_sharp)
+                          prefixIcon: Icon(Icons.phone_android)
                       ),
                     ),
                     SizedBox(height: 8,),
@@ -159,7 +160,7 @@ class _SaveDoctor_ScreenState extends State<SaveDoctor_Screen> {
                       decoration: InputDecoration(
                           labelText: 'Email',
                           border: OutlineInputBorder(),
-                          prefixIcon: Icon(Icons.text_snippet_sharp)
+                          prefixIcon: Icon(Icons.attach_email)
                       ),
                     ),
                     SizedBox(height: 8,),
@@ -192,7 +193,7 @@ class _SaveDoctor_ScreenState extends State<SaveDoctor_Screen> {
                       decoration: InputDecoration(
                           labelText: 'Remark',
                           border: OutlineInputBorder(),
-                          prefixIcon: Icon(Icons.text_snippet_sharp)
+                          prefixIcon: Icon(Icons.text_decrease)
                       ),
                     ),
 
@@ -216,12 +217,12 @@ class _SaveDoctor_ScreenState extends State<SaveDoctor_Screen> {
                             //  _formKey.currentState!.reset();
                           }
                         }, icon: Icon(Icons.check_circle), label: Text("Submit"),style: ElevatedButton.
-                        styleFrom(primary: Color.fromRGBO(24,49,83, 1)),),
+                        styleFrom(primary: Colors.green),),
                         SizedBox(width: 10,),
                         ElevatedButton.icon(onPressed: (){
                           resetForm();
                         }, icon: Icon(Icons.refresh_sharp), label: Text("Reset"),style: ElevatedButton.
-                        styleFrom(primary: Color.fromRGBO(24,49,83, 1)),)
+                        styleFrom(primary: Colors.green),)
 
                       ],
                     )

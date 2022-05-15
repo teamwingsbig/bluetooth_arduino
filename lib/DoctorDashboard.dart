@@ -26,35 +26,23 @@ class _DoctorDashboardState extends State<DoctorDashboard> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Row(
+        foregroundColor: Colors.green,
+        primary: true,
+        title:  Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(
-              "Doctor Dashboard",
-              style: TextStyle(color: Color.fromRGBO(24, 49, 83, 1)),
-            ),
-            SizedBox(
-              width: 20,
-            ),
-            ElevatedButton.icon(
-              onPressed: () {
-                Navigator.pushReplacementNamed(context, "Login");
-              },
-              icon: Icon(
-                Icons.logout,
-                size: 15,
-              ),
-              label: Text(
-                "Logout",
-                style: TextStyle(color: Colors.white),
-              ),
-              style: ElevatedButton.styleFrom(
-                  primary: Color.fromRGBO(24, 49, 83, 1)),
-            )
+            Text("Dashboard",
+              style: TextStyle(color:Colors.white),),
+
+            InkWell(child: Text("Logout",style: TextStyle(color: Colors.white),),onTap: (){
+              Navigator.pushReplacementNamed(context, "Login");
+            },),
+
           ],
         ),
-        backgroundColor: Colors.transparent,
-        bottomOpacity: 0.0,
-        elevation: 0.0,
+
+
+
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -63,30 +51,20 @@ class _DoctorDashboardState extends State<DoctorDashboard> {
               padding: const EdgeInsets.all(8.0),
               child: Container(
                   child: Center(
-                    child: ListTile(
-                      title: Text(
-                        "Welcome to My Blue Steth App",
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: Colors.blue.shade700),
-                      ),
-                      leading: Image.asset(
-                        "assets/images/stethoscope128.png",
-                        fit: BoxFit.fill,
-                      ),
-                    ),
+                    child: Image.asset(
+                      "assets/images/stethoscope128.png",
+                      fit: BoxFit.fill,
+                    )
                   ),
                   height: 100,
                   width: MediaQuery.of(context).size.width * 0.95,
-                  decoration: BoxDecoration(
-                    color: Colors.grey.shade300,
-                    borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(10),
-                        topRight: Radius.circular(10),
-                        bottomLeft: Radius.circular(10),
-                        bottomRight: Radius.circular(10)),
-                  )),
+                  ),
             ),
+            Text("Welcome to BlueScope",style: TextStyle(color: Colors.green,fontWeight: FontWeight.bold,fontSize: 20),),
+            SizedBox(
+              height: 30,
+            ),
+            Text("Profile",style: TextStyle(color: Colors.green,fontWeight: FontWeight.bold,fontSize: 18,decoration: TextDecoration.underline),),
             SizedBox(
               height: 10,
             ),
@@ -103,16 +81,7 @@ class _DoctorDashboardState extends State<DoctorDashboard> {
                               SizedBox(
                                 height: 10,
                               ),
-                              Center(
-                                child: Text(
-                                  "Profile",
-                                  style: TextStyle(
-                                      decoration: TextDecoration.underline,
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.green),
-                                ),
-                              ),
+
                               SizedBox(
                                 height: 10,
                               ),
@@ -147,14 +116,7 @@ class _DoctorDashboardState extends State<DoctorDashboard> {
                           ),
                           height: 130,
                           width: MediaQuery.of(context).size.width * 0.95,
-                          decoration: BoxDecoration(
-                            color: Colors.grey.shade300,
-                            borderRadius: BorderRadius.only(
-                                topLeft: Radius.circular(10),
-                                topRight: Radius.circular(10),
-                                bottomLeft: Radius.circular(10),
-                                bottomRight: Radius.circular(10)),
-                          )),
+                          ),
                     );
                   } else {
                     return Container();
