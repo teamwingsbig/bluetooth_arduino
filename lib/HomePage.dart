@@ -52,7 +52,7 @@ class _ConnectBluetoothDeviceState extends State<ConnectBluetoothDevice> {
          .asStream()
          .listen((List<BluetoothDevice> devices) async{
        for (BluetoothDevice device in devices) {
-         if(device.name=="BT05"){
+         if(device.name=="BLUESCOPE"){
           device.disconnect();
 
          }
@@ -64,7 +64,7 @@ class _ConnectBluetoothDeviceState extends State<ConnectBluetoothDevice> {
 
      await flutterBlue.scanResults.listen((List<ScanResult> results) async{
        for (ScanResult result in results) {
-         if(result.device.name=="BT05"){
+         if(result.device.name=="BLUESCOPE"){
            print("Device Found");
            setState(() {
              deviceStatus="Device Found";
@@ -82,7 +82,7 @@ class _ConnectBluetoothDeviceState extends State<ConnectBluetoothDevice> {
     for (BluetoothDevice device in devicesList) {
       print("Looping Device List");
       print(device.name);
-      if(device.name=='BT05'){
+      if(device.name=='BLUESCOPE'){
         setState(() {
           deviceStatus="Connecting to Device";
         });

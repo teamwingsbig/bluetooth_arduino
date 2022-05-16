@@ -77,7 +77,7 @@ class _PatientDashboardState extends State<PatientDashboard> {
                   child: Center(
                     child: ListTile(
                       title: Text(
-                        "Welcome to My Blue Steth App",
+                        "Welcome to Blue Scope ",
                         style: TextStyle(
                             fontWeight: FontWeight.bold,
                             color: Colors.blue.shade700),
